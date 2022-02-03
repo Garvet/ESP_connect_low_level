@@ -30,6 +30,7 @@ namespace dtp {
         send_len = len;
         send_status = Status::Ok;
         stage = Stage::Sent_initialization_byte;
+        amt_error = 0;
         // --- Переношу в локальный буфер, т.к. во время передачи
         // --- данные в нём могут измениться для следующей отправки.
         // --- Иначе перед заменой требовалось бы ожидать завершения.
@@ -128,6 +129,7 @@ namespace dtp {
                     stage = Stage::Received_initialization_byte;
                     last_send_byte = 0xDB;
                     uart_send(last_send_byte);
+                    amt_error = 0;
                 }
                 else {
                     last_receive_byte = 0;
@@ -152,11 +154,17 @@ namespace dtp {
                 break;
             case Stage::Received_length_byte:
                 // проверяю на 0xFF, если есть инверсия длины, принимаю серию байт, если 0 ожидаю байт длины
+                static uint8_t check_byte;
+                check_byte = (((~receive_len) & 0xFF) << 4 & 0xF0) | (((~receive_len) & 0xFF) >> 4 & 0x0F);
                 if(last_receive_byte == 0xFF) {
                     stage = Stage::Received_initialization_byte;
                 }
-                else {
+                else if (last_receive_byte == check_byte) {
                     stage = Stage::Receive_bytes;
+                }
+                else {
+                    stage = Stage::No_transmission;
+                    receive_status = Status::Error;
                 }
                 uart_receive(last_receive_byte);
                 break;
