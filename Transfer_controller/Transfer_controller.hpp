@@ -77,10 +77,10 @@ namespace dtp {
         Status receive_status{Status::Ok};     // статус приёма
         Stage stage{Stage::No_transmission};   // текущая стадия
 
-        void (*uart_send)(uint8_t &send_byte);
+        void (*uart_send)(uint8_t send_byte);
         void (*uart_receive)(uint8_t &receive_byte);
     public:
-        Transfer_controller(void (*uart_send)(uint8_t &send_byte), void (*uart_receive)(uint8_t &receive_byte));
+        Transfer_controller(void (*uart_send)(uint8_t send_byte), void (*uart_receive)(uint8_t &receive_byte));
 
         // Сброс всех полей и старт приёма
         void begin();

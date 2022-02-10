@@ -1,7 +1,7 @@
 #include "Transfer_controller.hpp"
 
 namespace dtp {
-    Transfer_controller::Transfer_controller(void (*uart_send)(uint8_t&),
+    Transfer_controller::Transfer_controller(void (*uart_send)(uint8_t),
                                              void (*uart_receive)(uint8_t&)):
             uart_send(uart_send), uart_receive(uart_receive) {
     }
