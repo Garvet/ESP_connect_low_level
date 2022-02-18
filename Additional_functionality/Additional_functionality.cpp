@@ -20,7 +20,11 @@ size_t convert_to_hex(const uint8_t* where, uint8_t* whence, size_t len) {
 }
 
 size_t convert_to_hex(const uint8_t* where, char* whence, size_t len) {
-    return convert_to_hex(where, (uint8_t*) whence, len);
-    Serial.p
-    for()
+    return convert_to_hex(where, reinterpret_cast<uint8_t*>(whence), len);
+}
+size_t convert_to_hex(const uint8_t* where, uint8_t* whence, uint8_t len) {
+    return convert_to_hex(where, whence, static_cast<size_t>(len));
+}
+size_t convert_to_hex(const uint8_t* where, char* whence, uint8_t len) {
+    return convert_to_hex(where, reinterpret_cast<uint8_t*>(whence), static_cast<size_t>(len));
 }
