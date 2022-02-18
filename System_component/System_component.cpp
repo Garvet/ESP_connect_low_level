@@ -58,12 +58,45 @@ namespace scc {
         }
     }
 
+    // ----- class System_component -----
     void System_component::set_basic_LoRa_settings(lrc::lrs::LoRa_setting setting) {
         lora_basic = setting;
     }
 
     lrc::lrs::LoRa_setting System_component::get_basic_LoRa_settings() {
         return lora_basic;
+    }
+
+    const lrc::lrs::LoRa_setting& System_component::get_basic_LoRa_settings() const {
+        return lora_basic;
+    }
+
+    // ----- class Router -----
+    bool Router::set_additional_LoRa_settings(lrc::lrs::LoRa_setting setting, uint8_t num) {
+        if(AMT_LORA < num)
+            return true;
+        lora_additional[num] = setting;
+        return false;
+    }
+
+    lrc::lrs::LoRa_setting Router::get_additional_LoRa_settings(uint8_t num) {
+        return lora_additional[num];
+    }
+
+    const lrc::lrs::LoRa_setting &Router::get_additional_LoRa_settings(uint8_t num) const {
+        return lora_additional[num];
+    }
+
+    void Router::set_additional_LoRa_settings(std::array<lrc::lrs::LoRa_setting, AMT_LORA> setting) {
+        lora_additional = setting;
+    }
+
+    std::array<lrc::lrs::LoRa_setting, AMT_LORA> Router::get_additional_LoRa_settings() {
+        return lora_additional;
+    }
+
+    const std::array<lrc::lrs::LoRa_setting, AMT_LORA> &Router::get_additional_LoRa_settings() const {
+        return lora_additional;
     }
 
 }

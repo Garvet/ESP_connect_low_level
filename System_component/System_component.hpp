@@ -48,25 +48,40 @@ namespace scc {
     // <<< () >>>
 
     // <<< () >>>
-    // <<< () >>>
     class System_component /*: public SAVE_CLASS (он : public BYTE_CLASS)*/ {
     protected:
         lrc::lrs::LoRa_setting lora_basic;
     public:
         virtual ~System_component() = default;
 
+        // Установка настройки основного передатчика
         void set_basic_LoRa_settings(lrc::lrs::LoRa_setting);
+        // Получение настройки основного передатчика
         lrc::lrs::LoRa_setting get_basic_LoRa_settings();
+        const lrc::lrs::LoRa_setting& get_basic_LoRa_settings() const;
 
 
     };
 
+    // <<< (Перемести в другой файл) >>>
+    const uint8_t AMT_LORA = 3;
 
     class Router : public System_component {
     protected:
-        lrc::lrs::LoRa_setting lora_additional[3];
+        std::array<lrc::lrs::LoRa_setting, AMT_LORA> lora_additional{};
     public:
         ~Router() override = default;
+
+        // Установка настройки определённого дополнительного передатчика
+        bool set_additional_LoRa_settings(lrc::lrs::LoRa_setting, uint8_t);
+        // Получение настройки определённого дополнительного передатчика
+        lrc::lrs::LoRa_setting get_additional_LoRa_settings(uint8_t);
+        const lrc::lrs::LoRa_setting& get_additional_LoRa_settings(uint8_t) const;
+        // Установка настроек всех дополнительных передатчиков
+        void set_additional_LoRa_settings(std::array<lrc::lrs::LoRa_setting, AMT_LORA>);
+        // Получение настроек всех дополнительных передатчиков
+        std::array<lrc::lrs::LoRa_setting, AMT_LORA> get_additional_LoRa_settings();
+        const std::array<lrc::lrs::LoRa_setting, AMT_LORA>& get_additional_LoRa_settings() const;
     };
 }
 
