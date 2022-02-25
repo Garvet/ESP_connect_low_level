@@ -15,29 +15,29 @@ namespace lrc {
             cr = new_cr;
         }
         // Установить настройки
-        void LoRa_setting::setFreq(uint32_t new_freq) {
+        void LoRa_setting::set_freq(uint32_t new_freq) {
             freq = new_freq;
         }
-        void LoRa_setting::setSf(Spreading_factor new_sf) {
+        void LoRa_setting::set_sf(Spreading_factor new_sf) {
             sf = new_sf;
         }
-        void LoRa_setting::setBw(Bandwidth new_bw) {
+        void LoRa_setting::set_bw(Bandwidth new_bw) {
             bw = new_bw;
         }
-        void LoRa_setting::setCr(Coding_rate new_cr) {
+        void LoRa_setting::set_cr(Coding_rate new_cr) {
             cr = new_cr;
         }
         // Получить настройки
-        uint32_t LoRa_setting::getFreq() const {
+        uint32_t LoRa_setting::get_freq() const {
             return freq;
         }
-        Spreading_factor LoRa_setting::getSf() const {
+        Spreading_factor LoRa_setting::get_sf() const {
             return sf;
         }
-        Bandwidth LoRa_setting::getBw() const {
+        Bandwidth LoRa_setting::get_bw() const {
             return bw;
         }
-        Coding_rate LoRa_setting::getCr() const {
+        Coding_rate LoRa_setting::get_cr() const {
             return cr;
         }
 

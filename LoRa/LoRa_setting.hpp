@@ -54,15 +54,15 @@ namespace lrc {
             LoRa_setting() = default;
             LoRa_setting(uint32_t, Spreading_factor, Bandwidth, Coding_rate);
             // Установить настройки
-            void setFreq(uint32_t new_freq);
-            void setSf(Spreading_factor new_sf);
-            void setBw(Bandwidth new_bw);
-            void setCr(Coding_rate new_cr);
+            void set_freq(uint32_t new_freq);
+            void set_sf(Spreading_factor new_sf);
+            void set_bw(Bandwidth new_bw);
+            void set_cr(Coding_rate new_cr);
             // Получить настройки
-            uint32_t getFreq() const;
-            Spreading_factor getSf() const;
-            Bandwidth getBw() const;
-            Coding_rate getCr() const;
+            uint32_t get_freq() const;
+            Spreading_factor get_sf() const;
+            Bandwidth get_bw() const;
+            Coding_rate get_cr() const;
         };
     }
 }
